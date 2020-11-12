@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        background: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .container-card {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 250px;
+        height: 450px;
+        width: 300px;
+        background: #a2d5f2dc;
+        border: 0px solid #a2d5f2;
+        border-radius: 5px;
+        box-shadow: 0px 0px 8px 0px #e2cfec;
+      }
+
+      .card-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -300%);
+      }
+
+      .fa-sun-o {
+        color: #fddb3a;
+        font-size: 50px;
+        text-align: center;
+      }
+
+      .card-body {
+        height: 300px;
+        width: 100%;
+        position: absolute;
+        top: 33%;
+        text-align: center;
+        line-height: 1.9rem;
+        overflow: hidden;
+        border-radius: 5px;
+      }
+
+      #temp-info {
+        margin-top: 10px;
+      }
+
+      .fa-street-view{
+          color: #fff;
+          animation: rotate 3s linear infinite normal;
+      }
+
+      @keyframes rotate {
+          0%{transform: rotateY(0deg);}
+          50%{transform: rotateY(180deg);}
+          100%{transform: rotateY(360deg);}
+      }
+
+      h1 {
+        color: #2f3640;
+      }
+
+      p {
+        color: #353b48;
+      }
+
+      .card-wave1 {
+        background-color: #d6e0f0d7;
+        height: 250px;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-10%);
+        border-radius: 39% 39% 28% 29% / 64% 40% 39% 72% ;
+      }
+
+      .card-wave2 {
+        background-color: #d6e0f07c;
+        height: 100%;
+        width: 100%;
+        top: 25%;
+        position: absolute;
+        border-radius: 32% 33% 35% 40% / 52% 31% 37% 37% ;
+        animation: rotateS 8s ease-in-out infinite normal;
+      }
+      .card-wave3 {
+        background-color: #d6e0f0a1;
+        height: 100%;
+        width: 100%;
+        top: 25%;
+        position: absolute;
+        border-radius: 45% 45% 35% 40% / 52% 31% 44% 57% ;
+        animation: rotateT 14s ease-in-out infinite normal;
+      }
+
+      @keyframes rotateS{
+          0%{transform: rotate(0deg);}
+          25%{transform: rotate(90deg);}
+          50%{transform: rotate(180deg);}
+          75%{transform: rotate(270deg);}
+          100%{transform: rotate(360deg);}
+      }
+
+      @keyframes rotateT{
+          0%{transform: rotate(0deg);}
+          25%{transform: rotate(-90deg);}
+          50%{transform: rotate(-180deg);}
+          75%{transform: rotate(-270deg);}
+          100%{transform: rotate(-360deg);}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-card">
+      <div class="card-img"><i class="fa fa-sun-o"></i></div>
+
+      <div class="card-body">
+        <div class="card-wave1">
+          <h2><i class="fa fa-street-view" aria-hidden="true"></i> {%location%},{%country%}</h2>
+          <p id="curDate">wed | nov-11 | 17:43pm</p>
+          <h2 id="temp-info">{%temp%}</h2>
+          <p id="tempmin_max">Min {%minTemp%} | Max {%maxTemp%}</p>
+        </div>
+        <div class="card-wave2"></div>
+        <div class="card-wave3"></div>
+      </div>
+    </div>
+
+    <script>
+        const currentDate = document.getElementById('curDate');
+        let weatherCon = document.getElementById('card-img');
+
+        const tempStatus = "Clouds"; 
+
+        const getCurrentDay = () => {
+          const dayName = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat"];
+            let now = new Date();
+            const day = dayName[now.getDay()];
+            return day;
+        }
+
+        const getCurrentTime = () => {
+          const monthName = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            let now = new Date();
+            var day = now.getDate();
+            var month = monthName[now.getMonth()+1];
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var time_notaion = ((hours>23 || hours<12) ? "am" : "pm");
+
+            const day_time = (month+"-"+day+" | "+hours+":"+(minutes<10 ? "0"+minutes : minutes)+" "+time_notaion);
+            currentDate.innerHTML = getCurrentDay()+ " | " +day_time;
+        }
+       
+        getCurrentTime();
+    </script>
+  </body>
+</html>
