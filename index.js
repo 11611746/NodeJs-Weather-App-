@@ -1,5 +1,5 @@
 const apikey =
-  "http://api.openweathermap.org/data/2.5/weather?q=Tinsukia&appid=a5edb05e1e44f273552b97caf95af764";
+  "http://api.openweathermap.org/data/2.5/weather?q=xxxxxxx&appid=xxxxxxxxxxxxxxxxxxxxxxxx";
 
   const http = require('http');
   const fs = require('fs');
